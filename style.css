@@ -1,0 +1,142 @@
+:root {
+  /*cores que serão utilizadas no projeto*/
+  --green: #B7CA81;
+  --green: #A0D6A1;
+  --pink: #D08791;
+}
+
+
+html {
+  background: linear-gradient(to bottom right, #DDE8E2AA, #DDD9C5AA);
+}
+
+/*Esse AA no final significa trasparência, ou seja, o fundo do degradê é ligeiramente transparente*/
+/*superior esquerdo para o canto inferior direito*/
+
+.baby-yoda {
+  width: 6em;
+  height: 4em;
+  border-radius: 3em 3em 4.5em 4.5em;
+  /*topo-esquerdo topo-direito inferior-direito inferior-esquerdo;*/
+  background: var(--green);
+  /* background-image: radial-gradient(
+    circle at 1.5em, #fff,#fff .25em, transparent .3em ),
+    radial-gradient( circle at 1em,#000,#000 .9em, transparent .2em ); */
+  position: relative;
+
+  background-position: 0.6em 0.35em, 0.7em 0.6em;
+  /*posição das bolas brancas e pretas*/
+  background-size: 2.75em 1.95em;
+  /*tamanho (largura e altura)*/
+  background-repeat: repeat-x;
+  /*repetir apenas na direção horizontal (eixo X)*/
+
+  .olhos {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    max-height: max-content;
+    justify-content: center;
+    gap: 1.5em;
+    overflow: hidden;
+    animation: eyes 2.5s infinite alternate ease-in-out;
+    top: 50px;
+
+    .olho {
+      position: relative;
+      width: 1.5em;
+      height: 1.5em;
+      border-radius: 100%;
+      background-color: #000;
+
+
+      &::before {
+        position: absolute;
+        content: "";
+        width: 45px;
+        height: 45px;
+        top: 12px;
+        left: 12px;
+        border-radius: 100%;
+        filter: blur(2px);
+        background-color: #fff;
+      }
+    }
+  }
+
+  &::before,
+  &::after {
+    /*orelhas*/
+    content: '';
+    /*obrigatório para que ::before e ::after apareçam na tela*/
+    display: block;
+    width: 5em;
+    height: 1.5em;
+    background: var(--pink);
+    border-top: solid .5em var(--green);
+    position: absolute;
+    top: 0.5em;
+    margin: 0 -1em;
+    z-index: -1;
+    /*coloca as orelhas para trás da cabeça*/
+    border-radius: 2em 1em;
+
+    animation: ears 2s cubic-bezier(.8, .02, .2, .96) infinite alternate;
+  }
+
+  &::before {
+    --rotate: 20deg;
+    /*rotacionar em 20graus*/
+    transform-origin: center right;
+    /*ponto em torno do qual o elemento gira, escala ou inclina*/
+    right: 100%;
+    border-bottom-left-radius: 9em 4em;
+  }
+
+  &::after {
+    --rotate: -20deg;
+    transform-origin: center left;
+    left: 100%;
+    border-bottom-right-radius: 9em 4em;
+  }
+}
+
+@keyframes eyes {
+  0% {
+    clip-path: inset(50% 0 50% 0);
+  }
+
+  25% {
+    clip-path: inset(0% 0 0% 0);
+  }
+
+  50% {
+    clip-path: inset(48% 0 48% 0);
+  }
+
+  75% {
+    clip-path: inset(0% 0 0% 0);
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes ears {
+  to {
+    transform: rotate(var(--rotate));
+  }
+}
+
+html {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
+body {
+  margin: auto;
+  font-size: 70px;
+  /*Fiz com que o baby Yoda ficasse em um tamanho legal quando a tela tiver em 100%*/
+}
